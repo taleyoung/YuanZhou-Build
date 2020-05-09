@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
+    "egg-mysql": "^3.0.0",
     "midway": "^1.0.0"
   },
   "devDependencies": {
