@@ -1,41 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import { Card, Button, Dialog, Input } from '@alifd/next';
 import style from './index.module.scss';
 
-const data = [
-  {
-    title: '限时促销',
-    img: 'https://img.alicdn.com/tfs/TB1FNIOSFXXXXaWXXXXXXXXXXXX-260-188.png',
-    content: '适用于限时促销模块'
-  },
-  {
-    title: '限时促销',
-    img: 'https://img.alicdn.com/tfs/TB1FNIOSFXXXXaWXXXXXXXXXXXX-260-188.png',
-    content: '适用于限时促销模块'
-  },
-  {
-    title: '限时促销',
-    img: 'https://img.alicdn.com/tfs/TB1FNIOSFXXXXaWXXXXXXXXXXXX-260-188.png',
-    content: '适用于限时促销模块'
-  },
-  {
-    title: '限时促销',
-    img: 'https://img.alicdn.com/tfs/TB1FNIOSFXXXXaWXXXXXXXXXXXX-260-188.png',
-    content: '适用于限时促销模块'
-  },
-  {
-    title: '限时促销',
-    img: 'https://img.alicdn.com/tfs/TB1FNIOSFXXXXaWXXXXXXXXXXXX-260-188.png',
-    content: '适用于限时促销模块'
-  },
-  {
-    title: '限时促销',
-    img: 'https://img.alicdn.com/tfs/TB1FNIOSFXXXXaWXXXXXXXXXXXX-260-188.png',
-    content: '适用于限时促销模块'
-  }
-];
+interface IData {
+  id: number;
+  title: string;
+  img: string;
+  content: string;
+  // update_time: any;
+}
 
-const PageCard = () => {
+interface IProps {
+  list: Array<IData>;
+}
+
+const PageCard: FC<IProps> = ({ list }) => {
   const [dialogShow, setDialogShow] = useState<boolean>(false);
 
   const [title, setTitle] = useState<string>('');
@@ -47,8 +26,8 @@ const PageCard = () => {
       <Card className={style.mediaCard} free>
         <Card.Header title="新增页面模板" />
       </Card>
-      {data.map(item => (
-        <Card className={style.mediaCard} free>
+      {list.map(item => (
+        <Card className={style.mediaCard} free key={item.title}>
           <Card.Media>
             <img src={item.img} />
           </Card.Media>

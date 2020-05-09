@@ -23,6 +23,11 @@ export default (appInfo: any) => {
     // load into app, default is open
     app: true
   };
+  config.cors = {
+    origin: "http://127.0.0.1:3333",
+    credentials: true,
+    allowMethods: "GET,HEAD,PUT,POST,DELETE,PATCH"
+  };
 
   return config;
 };

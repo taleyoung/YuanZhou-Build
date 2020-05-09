@@ -14,6 +14,7 @@ export class PageTplController {
   async index() {
     const res = await this.service.getPageTplList();
     console.log("res SERVICE :>> ", res);
-    this.ctx.body = `Welcome to midwayjs!`;
+    this.ctx.body = res;
+    return res;
   }
 }
