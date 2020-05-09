@@ -27,11 +27,11 @@ import Footer from './components/Footer';
 })();
 
 export default function BasicLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
-  const getDevice = (width: number) => {
+  const getDevice = (width: number): 'phone' | 'tablet' | 'desktop' => {
     const isPhone =
       typeof navigator !== 'undefined' &&
       navigator &&
@@ -47,7 +47,7 @@ export default function BasicLayout({
   };
 
   const [device, setDevice] = useState(getDevice(NaN));
-  window.addEventListener('optimizedResize', e => {
+  window.addEventListener('optimizedResize', (e: any) => {
     setDevice(getDevice(e && e.target && e.target.innerWidth));
   });
   return (
@@ -55,19 +55,19 @@ export default function BasicLayout({
       <Shell
         type="dark"
         style={{
-          minHeight: '100vh',
+          minHeight: '100vh'
         }}
       >
         <Shell.Branding>
           <Logo
-            image="https://img.alicdn.com/tfs/TB1.ZBecq67gK0jSZFHXXa9jVXa-904-826.png"
-            text="Logo"
+            // image="https://img.alicdn.com/tfs/TB1.ZBecq67gK0jSZFHXXa9jVXa-904-826.png"
+            text="圆舟搭建"
           />
         </Shell.Branding>
         <Shell.Navigation
           direction="hoz"
           style={{
-            marginRight: 10,
+            marginRight: 10
           }}
         ></Shell.Navigation>
         <Shell.Action></Shell.Action>
@@ -75,7 +75,11 @@ export default function BasicLayout({
           <PageNav />
         </Shell.Navigation>
 
-        <Shell.Content>{children}</Shell.Content>
+        <Shell.Content>
+          <div style={{ backgroundColor: '#fff', padding: '5px' }}>
+            {children}
+          </div>
+        </Shell.Content>
         <Shell.Footer>
           <Footer />
         </Shell.Footer>
