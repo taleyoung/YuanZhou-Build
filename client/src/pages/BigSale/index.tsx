@@ -8,7 +8,7 @@ const { H1, H2 } = Typography;
 
 const BigSale = () => {
   const { data: pageList, request: getList } = useRequest({
-    url: '/page/list',
+    url: '/page',
     method: 'GET'
   });
 

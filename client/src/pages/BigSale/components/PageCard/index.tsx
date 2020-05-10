@@ -1,5 +1,6 @@
 import React, { useState, FC } from 'react';
-import { Card, Button, Dialog, Input } from '@alifd/next';
+import { useRequest } from 'ice';
+import { Card, Button, Dialog, Input, Icon } from '@alifd/next';
 import style from './index.module.scss';
 
 interface IData {
@@ -17,14 +18,50 @@ interface IProps {
 const PageCard: FC<IProps> = ({ list }) => {
   const [dialogShow, setDialogShow] = useState<boolean>(false);
 
+  const [id, setId] = useState<number>();
   const [title, setTitle] = useState<string>('');
   const [imgSrc, setImgSrc] = useState<string>('');
   const [content, setContent] = useState<string>('');
 
+  const { data, request: update } = useRequest({
+    url: '/page',
+    method: 'PUT'
+  });
+
+  const { data: addRes, request: add } = useRequest({
+    url: '/page',
+    method: 'post'
+  });
+
+  const showDialog = (type, item) => {
+    console.log('item :>> ', item);
+    setDialogShow(true);
+    setId(item.id);
+    setTitle(item.title);
+    setContent(item.content);
+  };
+
+  const addPage = () => {
+    add();
+    console.log('addRes :>> ', addRes);
+  };
+  const updatePage = () => {
+    setDialogShow(false);
+    const params = {
+      id,
+      title,
+      content
+    };
+    update({
+      data: params
+    });
+    console.log('data :>> ', data);
+  };
+
   return (
     <div className={style.container}>
       <Card className={style.mediaCard} free>
-        <Card.Header title="新增页面模板" />
+        <Icon type="add" size="large" onClick={() => addPage()}></Icon>
       </Card>
       {list.map(item => (
         <Card className={style.mediaCard} free key={item.title}>
@@ -44,7 +81,7 @@ const PageCard: FC<IProps> = ({ list }) => {
             <Button
               type="secondary"
               key="action1"
-              onClick={() => setDialogShow(true)}
+              onClick={() => showDialog('update', item)}
             >
               修改
             </Button>
@@ -57,7 +94,7 @@ const PageCard: FC<IProps> = ({ list }) => {
       <Dialog
         title="更改页面信息"
         visible={dialogShow}
-        onOk={() => setDialogShow(false)}
+        onOk={() => updatePage()}
         onCancel={() => setDialogShow(false)}
         onClose={() => setDialogShow(false)}
       >
