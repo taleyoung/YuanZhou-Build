@@ -4,6 +4,7 @@ import Dashboard from '@/pages/Dashboard';
 import Promotion from '@/pages/Promotion';
 import Manage from '@/pages/Manage';
 import Material from '@/pages/Material';
+import PageEdit from '@/pages/PageEdit';
 
 const routerConfig = [
   {
@@ -30,6 +31,11 @@ const routerConfig = [
         path: 'material',
         exact: true,
         component: Material
+      },
+      {
+        path: 'edit',
+        exact: true,
+        component: PageEdit
       }
     ]
   }

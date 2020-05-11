@@ -1,102 +1,123 @@
-import React, { useState, FC } from 'react';
+import React, { useState, FC, useEffect } from 'react';
 import { useRequest } from 'ice';
-import { Card, Button, Dialog, Input, Icon } from '@alifd/next';
+import { Button, Dialog, Input, Typography } from '@alifd/next';
+import MyCard from './MyCard';
 import style from './index.module.scss';
 
-interface IData {
-  id: number;
-  title: string;
-  img: string;
-  content: string;
-  // update_time: any;
-}
+const { H2 } = Typography;
 
-interface IProps {
-  list: Array<IData>;
-}
+interface IProps {}
 
-const PageCard: FC<IProps> = ({ list }) => {
+const PageCard: FC<IProps> = () => {
   const [dialogShow, setDialogShow] = useState<boolean>(false);
+
+  const [pageList, setPageList] = useState();
 
   const [id, setId] = useState<number>();
   const [title, setTitle] = useState<string>('');
   const [imgSrc, setImgSrc] = useState<string>('');
   const [content, setContent] = useState<string>('');
+  const [isAdd, setIsAdd] = useState<boolean>(false);
 
-  const { data, request: update } = useRequest({
+  const { data: listData, request: getList } = useRequest({
+    url: '/page',
+    method: 'GET'
+  });
+
+  console.log('listData', listData);
+
+  const { request: _update } = useRequest({
     url: '/page',
     method: 'PUT'
   });
 
-  const { data: addRes, request: add } = useRequest({
+  const { request: _add } = useRequest({
     url: '/page',
     method: 'post'
   });
 
-  const showDialog = (type, item) => {
-    console.log('item :>> ', item);
+  const { request: _delete } = useRequest({
+    url: '/page',
+    method: 'DELETE'
+  });
+
+  useEffect(() => {
+    getList();
+  }, []);
+
+  useEffect(() => {
+    if (listData && listData.code === 0) {
+      setPageList(listData.data);
+    }
+  }, [listData]);
+
+  const showDialog = (type: 'update' | 'add', item?: any) => {
+    setDialogShow(true);
+    if (type === 'add') {
+      setIsAdd(true);
+      return;
+    }
+    setIsAdd(false);
     setDialogShow(true);
     setId(item.id);
     setTitle(item.title);
     setContent(item.content);
   };
 
-  const addPage = () => {
-    add();
-    console.log('addRes :>> ', addRes);
-  };
-  const updatePage = () => {
+  const cancelDialog = () => {
     setDialogShow(false);
-    const params = {
+    setId(NaN);
+    setTitle('');
+    setContent('');
+  };
+
+  const updatePage = async () => {
+    setDialogShow(false);
+    const data = {
       id,
       title,
       content
     };
-    update({
-      data: params
-    });
-    console.log('data :>> ', data);
+    if (isAdd) {
+      await _add({
+        data
+      });
+    } else {
+      await _update({
+        data
+      });
+    }
+    getList();
   };
+
+  const delPage = async (id: number) => {
+    await _delete({
+      data: { id }
+    });
+    getList();
+  };
+
+  // const showMsg = (tip: string) => Message.success(tip);
 
   return (
     <div className={style.container}>
-      <Card className={style.mediaCard} free>
-        <Icon type="add" size="large" onClick={() => addPage()}></Icon>
-      </Card>
-      {list.map(item => (
-        <Card className={style.mediaCard} free key={item.title}>
-          <Card.Media>
-            <img src={item.img} />
-          </Card.Media>
-          <Card.Header
-            title={item.title}
-            extra={[
-              <Button type="primary" key="action1" text>
-                进入模板
-              </Button>
-            ]}
-          />
-          <Card.Content>{item.content}</Card.Content>
-          <Card.Actions>
-            <Button
-              type="secondary"
-              key="action1"
-              onClick={() => showDialog('update', item)}
-            >
-              修改
-            </Button>
-            <Button type="primary" warning>
-              删除
-            </Button>
-          </Card.Actions>
-        </Card>
-      ))}
+      <div className={style.topBar}>
+        <H2>会场页面</H2>
+        <Button type="secondary" onClick={() => showDialog('add')}>
+          添加新的页面模板
+        </Button>
+      </div>
+      <MyCard
+        pageList={pageList}
+        showDialog={showDialog}
+        delPage={delPage}
+      ></MyCard>
       <Dialog
-        title="更改页面信息"
+        title={isAdd ? '添加模板信息' : '更新模板信息'}
         visible={dialogShow}
         onOk={() => updatePage()}
-        onCancel={() => setDialogShow(false)}
-        onClose={() => setDialogShow(false)}
+        onCancel={() => cancelDialog()}
+        onClose={() => cancelDialog()}
       >
         <div className={style.input}>
           标题：
@@ -108,21 +129,21 @@ const PageCard: FC<IProps> = ({ list }) => {
           />
         </div>
         <div className={style.input}>
-          图片：
-          <Input
-            defaultValue="clear by click"
-            size="medium"
-            value={imgSrc}
-            onChange={v => setImgSrc(v)}
-          />
-        </div>
-        <div className={style.input}>
           描述：
           <Input
             defaultValue="clear by click"
             size="medium"
             value={content}
             onChange={v => setContent(v)}
+          />
+        </div>
+        <div className={style.input}>
+          图片：
+          <Input
+            defaultValue="clear by click"
+            size="medium"
+            value={imgSrc}
+            onChange={v => setImgSrc(v)}
           />
         </div>
       </Dialog>

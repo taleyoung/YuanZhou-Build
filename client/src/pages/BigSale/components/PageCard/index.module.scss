@@ -1,7 +1,15 @@
-.container {
+.cardWrap {
   display: flex;
   justify-content: flex-start;
   flex-wrap: wrap;
+}
+.topBar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  h2 {
+    margin-right: 30px;
+  }
 }
 .mediaCard {
   width: 200px;
