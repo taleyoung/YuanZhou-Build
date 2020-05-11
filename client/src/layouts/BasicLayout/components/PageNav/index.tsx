@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, withRouter } from 'ice';
+import { AppLink } from '@ice/stark';
 import { Nav } from '@alifd/next';
 import { asideMenuConfig } from '../../menuConfig';
 
@@ -14,7 +14,7 @@ export interface IMenuItem {
   children?: IMenuItem[];
 }
 
-function getNavMenuItems(menusData: any[]) {
+function getNavMenuItems(menusData: any[], isCollapse: boolean) {
   if (!menusData) {
     return [];
   }
@@ -22,19 +22,20 @@ function getNavMenuItems(menusData: any[]) {
   return menusData
     .filter(item => item.name && !item.hideInMenu)
     .map((item, index) => {
-      return getSubMenuOrItem(item, index);
+      return getSubMenuOrItem(item, index, isCollapse);
     });
 }
 
-function getSubMenuOrItem(item: IMenuItem, index: number) {
+function getSubMenuOrItem(item: IMenuItem, index: number, isCollapse: boolean) {
   if (item.children && item.children.some(child => child.name)) {
-    const childrenItems = getNavMenuItems(item.children);
+    const childrenItems = getNavMenuItems(item.children, false);
     if (childrenItems && childrenItems.length > 0) {
       const subNav = (
         <SubNav
           key={index}
           icon={item.icon}
           label={item.name}
+          mode={isCollapse ? 'popup' : 'inline'}
         >
           {childrenItems}
         </SubNav>
@@ -46,9 +47,9 @@ function getSubMenuOrItem(item: IMenuItem, index: number) {
   }
   const navItem = (
     <NavItem key={item.path} icon={item.icon}>
-      <Link to={item.path}>
+      <AppLink to={item.path}>
         {item.name}
-      </Link>
+      </AppLink>
     </NavItem>
   );
 
@@ -56,8 +57,7 @@ function getSubMenuOrItem(item: IMenuItem, index: number) {
 }
 
 const Navigation = (props, context) => {
-  const { location } = props;
-  const { pathname } = location;
+  const { pathname } = props;
   const { isCollapse } = context;
 
   return (
@@ -69,9 +69,8 @@ const Navigation = (props, context) => {
       openMode="single"
       iconOnly={isCollapse}
       hasArrow={false}
-      mode={isCollapse ? 'popup' : 'inline'}
     >
-      {getNavMenuItems(asideMenuConfig)}
+      {getNavMenuItems(asideMenuConfig, isCollapse)}
     </Nav>
   );
 };
@@ -80,6 +79,4 @@ Navigation.contextTypes = {
   isCollapse: PropTypes.bool,
 };
 
-const PageNav = withRouter(Navigation);
-
-export default PageNav;
+export default Navigation;

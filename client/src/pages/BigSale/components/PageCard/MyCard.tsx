@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'ice';
 import { Card, Button } from '@alifd/next';
-import pageImg from '../../../../../static/page.png';
+import pageImg from './page.png';
 import style from './index.module.scss';
 
 interface IData {
