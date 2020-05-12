@@ -3,11 +3,13 @@
 ## 项目简述
 
 YuanZhou-Build
-一个基于 midway+ice 框架的 node 中后台应用，仿搭建系统 cms 的 demo
+
+基于 ice+midway 框架的 node 中后台应用，仿搭建系统 cms 的 demo
 
 ### 总体技术栈
 
 前端：ts+react hooks+ice
+
 后端：ts+midway+mysql
 
 ### 希望完成的技能点
@@ -23,19 +25,21 @@ YuanZhou-Build
 
 ### TODO
 
-1. 功能仅限 demo
-2. 只完成 curd 功能，一些 loading 效果等体验功能未做。
+1. ** 功能仅限 demo **
+2. ** 只完成 curd 功能，一些 loading 效果等体验功能未做。 **
 
 ## 项目进展
 
 ### 应用的功能开发
 
 目前已完成的功能点还十分简单，demo 级别，数据库只涉及到两张表，即对 **会场模板表** 和 **基础物料表** 的 crud 增删改查。
+
 暂无复杂前端交互及复杂状态管理，无复杂数据库结构及数据查询等。
+
 对应的前端页面
 ![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/master/screenshot/frontend1.png)
 
-![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/master/screenshot/frontend1.png)
+![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/master/screenshot/frontend2.png)
 
 数据表结构
 
@@ -44,11 +48,13 @@ YuanZhou-Build
 ### 微前端架构
 
 借助于 ice 体系中的 icestark ，通过 build-plugin-icestark 插件，十分简单的将现有应用改造为微前端应用。
+
 在目前的代码结构中，客户端项目分为 client-framwork 项目和 client-child 项目。
 
 #### 一. client-framework
 
 client-framework 项目是框架主应用，负责提供整体应用的容器，运行在**3333 端口**。
+
 主要的改造方法为：
 
 1. FrameworkLayout 容器层组件布局，以及监听每个应用的挂载与卸载。
@@ -59,6 +65,7 @@ client-framework 项目是框架主应用，负责提供整体应用的容器，
 #### 二. client-child
 
 client-child 项目是一个子应用，给主应用提供 js/css 文件，运行在**3334 端口**。
+
 在目前的代码实现中，client-child 完成了 BigSale 会场模板和编辑页面
 
 ![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/master/screenshot/child.png)
@@ -66,6 +73,7 @@ client-child 项目是一个子应用，给主应用提供 js/css 文件，运�
 #### swagger 的接口自动化
 
 借助 egg 生态中的 egg-swagger-doc 来实现接口 doc 自动化。
+
 简单写一下相关步骤：
 
 1. 首先在配置文件中配置 swagger 的基本项
