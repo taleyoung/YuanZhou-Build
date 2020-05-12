@@ -19,12 +19,10 @@ export default function BasicLayout(props: {
     <Shell
       type="dark"
       style={{
-        minHeight: '100vh',
+        minHeight: '100vh'
       }}
     >
-      <Shell.Branding>
-        Framework
-      </Shell.Branding>
+      <Shell.Branding>圆舟搭建</Shell.Branding>
 
       <Shell.Navigation>
         <PageNav pathname={pathname} />
