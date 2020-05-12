@@ -26,7 +26,7 @@ const EditPage = () => {
           </div>
         </div>
         <div className={style.preview}>
-          <H2>会场预览(图片)</H2>
+          <H2>会场预览(目前仅为图片演示)</H2>
           <div>
             <img src={page} alt="" className={style.img} />
           </div>

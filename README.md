@@ -25,8 +25,8 @@ YuanZhou-Build
 
 ### TODO
 
-1. ** 功能仅限 demo **
-2. ** 只完成 curd 功能，一些 loading 效果等体验功能未做。 **
+1. **功能仅限 demo**
+2. **只完成 crud 功能，一些 loading 效果等体验功能未做。**
 
 ## 项目进展
 
@@ -70,7 +70,7 @@ client-child 项目是一个子应用，给主应用提供 js/css 文件，运�
 
 ![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/master/screenshot/child.png)
 
-#### swagger 的接口自动化
+### swagger 的接口自动化
 
 借助 egg 生态中的 egg-swagger-doc 来实现接口 doc 自动化。
 
@@ -82,14 +82,14 @@ client-child 项目是一个子应用，给主应用提供 js/css 文件，运�
 
 ![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/master/screenshot/swagger.png)
 
-#### 装饰器的应用
+### 装饰器的应用
 
 因为目前写的应用功能十分简单（只涉及两个表的增删改查），并没有挖掘到需自定义装饰器的场景，不过实际使用中接触到很多装饰器的应用的。
 
 1. 前端写类组件的时候，react-redux 一般通过 connect 高阶组件来实现向组件内注入数据，实际上也可以改写为装饰器写法，如@connect()()。
 2. 在 midway 场景下，核心思想是 loC 依赖注入，使用的过程中会大量接触装饰器，比如通过@provide()和@inject()两个装饰器来完成绑定定义和依赖注入属性。除此之外，还有@controller(),@config()等装饰器的应用大大减少代码量，提高效率。
 
-#### 前后端研发文档
+### 前后端研发文档
 
 **目录命名**  
 通读 ice 和 midway 官网文档，目录命名按照官网推荐来进行。
