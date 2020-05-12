@@ -12,12 +12,14 @@ YuanZhou-Build
 
 ### 希望完成的技能点
 
-✅ 1. 使用 ts
-✅ 2. 使用 react hooks
-✅ 3. 微前端架构
-✅ 4. 代码即文档，接口 doc 自动化
-🔲 5. 装饰器，自定义装饰器
-🔲 6. 有前后端的研发规范文档，包含 lint，ci，目录命名，git flow 等
+1. ✅ 使用 ts
+2. ✅ 使用 react hooks
+3. ✅ 微前端架构
+4. ✅ 代码即文档，接口 doc 自动化
+5. ✅ 使用装饰器
+6. ❌ 自定义装饰器
+7. ✅ 有前后端的研发规范文档，包含 lint，ci，目录命名，git flow 等
+8. ❌ CI/git-flow
 
 ### TODO
 
@@ -31,9 +33,13 @@ YuanZhou-Build
 目前已完成的功能点还十分简单，demo 级别，数据库只涉及到两张表，即对 **会场模板表** 和 **基础物料表** 的 crud 增删改查。
 暂无复杂前端交互及复杂状态管理，无复杂数据库结构及数据查询等。
 对应的前端页面
-![](media/15887758763642/15892789854427.jpg)
+![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/screenshot/frontend1.png)
+
+![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/screenshot/frontend1.png)
 
 数据表结构
+
+![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/screenshot/db.png)
 
 ### 微前端架构
 
@@ -48,10 +54,14 @@ client-framework 项目是框架主应用，负责提供整体应用的容器，
 1. FrameworkLayout 容器层组件布局，以及监听每个应用的挂载与卸载。
 2. 在 app.tsx 文件中通过 getApps 钩子发现子应用，设置主应用的路由，主要通过获取子应用的 js 和 css 文件来加载子应用。
 
+![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/screenshot/framework.png)
+
 #### 二. client-child
 
 client-child 项目是一个子应用，给主应用提供 js/css 文件，运行在**3334 端口**。
 在目前的代码实现中，client-child 完成了 BigSale 会场模板和编辑页面
+
+![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/screenshot/child.png)
 
 #### swagger 的接口自动化
 
@@ -61,6 +71,8 @@ client-child 项目是一个子应用，给主应用提供 js/css 文件，运�
 1. 首先在配置文件中配置 swagger 的基本项
 2. 编写 contract 的类型定义
 3. 在 controller 层，添加对应的注释，在 localhost:70001/swagger-ui.html 可查看 ui 页面
+
+![](https://raw.githubusercontent.com/taleyoung/YuanZhou-Build/screenshot/swagger.png)
 
 #### 装饰器的应用
 

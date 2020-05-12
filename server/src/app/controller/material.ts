@@ -34,8 +34,8 @@ export default class MaterialController {
   }
 
   /**
-   * @summary 添加会场模板
-   * @description 添加会场模板
+   * @summary 添加物料模块
+   * @description 添加物料
    * @router post /material
    * @request body addMaterial *body
    */
@@ -52,8 +52,8 @@ export default class MaterialController {
   }
 
   /**
-   * @summary 修改会场模板
-   * @description 修改会场模板的基本信息
+   * @summary 修改物料信息
+   * @description 修改物料
    * @router put /material
    * @request body updateMaterial *body
    */
@@ -70,8 +70,8 @@ export default class MaterialController {
   }
 
   /**
-   * @summary 删除会场模板
-   * @description 删除会场模板
+   * @summary 删除物料
+   * @description 删除物料
    * @router delete /material
    * @request body deleteMaterial *body
    */
