@@ -1,6 +1,6 @@
 import { app, assert } from "midway-mock/bootstrap";
 
-describe("test/app/controller/home.test.ts", () => {
+describe("test/app/controller/page.test.ts", () => {
   it("should GET /", () => {
     return app
       .httpRequest()

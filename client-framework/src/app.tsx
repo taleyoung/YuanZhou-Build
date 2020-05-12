@@ -14,6 +14,9 @@ const appConfig: any = {
   router: {
     type: 'browser'
   },
+  request: {
+    baseURL: 'http://127.0.0.1:7001'
+  },
   icestark: {
     type: 'framework',
     Layout: FrameworkLayout,

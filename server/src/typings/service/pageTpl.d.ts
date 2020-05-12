@@ -6,12 +6,9 @@ export interface IPageTplOption {
 }
 export interface IPageTplService {
   getPageTplList: () => any;
-  updatePageTpl: (option: IPageTplOption) => any;
-  addPageTpl;
-  deletePageTpl;
-}
-export interface IPageTplResult {
-  any: any;
+  updatePageTpl: (option: IPageTplOption) => Promise<any>;
+  addPageTpl: (option) => Promise<any>;
+  deletePageTpl: (option) => Promise<any>;
 }
 
 export interface IUpdatePageOpion {}

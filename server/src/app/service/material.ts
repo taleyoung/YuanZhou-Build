@@ -1,19 +1,19 @@
-import { inject, provide, plugin } from "midway";
+import { provide, plugin } from "midway";
 
-import { IPageTplModel } from "../../typings/model/pageTpl";
 import { IResFormat } from "../../typings/interface";
-import { IPageTplOption, IPageTplService } from "../../typings/service/pageTpl";
+import {
+  IMaterialOption,
+  IMaterialService
+} from "../../typings/service/material";
 
-@provide("pageTplService")
-export class PageTplService implements IPageTplService {
-  @inject() pageTplModel: IPageTplModel;
-
+@provide("materialService")
+export class MaterialService implements IMaterialService {
   @plugin()
   mysql;
 
-  async getPageTplList(): Promise<IResFormat<any>> {
+  async getMaterialList(): Promise<IResFormat<any>> {
     try {
-      const res = await this.mysql.query("SELECT * FROM page", []);
+      const res = await this.mysql.query("SELECT * FROM material", []);
       return {
         code: 0,
         data: res
@@ -27,10 +27,10 @@ export class PageTplService implements IPageTplService {
     }
   }
 
-  async updatePageTpl(option: IPageTplOption): Promise<IResFormat<any>> {
+  async updateMaterial(option: IMaterialOption): Promise<IResFormat<any>> {
     try {
       const res = await this.mysql.query(
-        "UPDATE page SET title=?, content=?, img=? WHERE id=?",
+        "UPDATE material SET title=?, content=?, img=? WHERE id=?",
         [option.title, option.content, option.img, option.id]
       );
       console.log("service - res", res);
@@ -50,10 +50,10 @@ export class PageTplService implements IPageTplService {
     }
   }
 
-  async addPageTpl(option): Promise<IResFormat<any>> {
+  async addMaterial(option): Promise<IResFormat<any>> {
     try {
       const res = await this.mysql.query(
-        "INSERT INTO page (title, content, img) VALUES(?,?,?);",
+        "INSERT INTO material (title, content, img) VALUES(?,?,?);",
         [option.title, option.content, option.img]
       );
       console.log("service - res", res);
@@ -71,9 +71,9 @@ export class PageTplService implements IPageTplService {
       };
     }
   }
-  async deletePageTpl(option): Promise<IResFormat<any>> {
+  async deleteMaterial(option): Promise<IResFormat<any>> {
     try {
-      const res = await this.mysql.query("DELETE FROM page WHERE id = ?", [
+      const res = await this.mysql.query("DELETE FROM material WHERE id = ?", [
         option.id
       ]);
       console.log("service - res", res);
