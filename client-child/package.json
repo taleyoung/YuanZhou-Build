@@ -23,7 +23,7 @@
     "stylelint": "^13.0.0"
   },
   "scripts": {
-    "start": "icejs start",
+    "start": "icejs start --port=3334",
     "build": "icejs build",
     "lint": "npm run eslint && npm run stylelint",
     "eslint": "eslint --cache --ext .js,.jsx ./",

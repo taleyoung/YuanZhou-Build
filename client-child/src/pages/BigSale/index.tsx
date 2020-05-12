@@ -16,9 +16,6 @@ const BigSale = () => {
     <div className={style.container}>
       <H1>当前大促状态：双11</H1>
       <Divider></Divider>
-      {/* {pageList && (
-        <PageCard list={pageList} refresh={() => refresh()}></PageCard>
-      )} */}
       <PageCard></PageCard>
     </div>
   );

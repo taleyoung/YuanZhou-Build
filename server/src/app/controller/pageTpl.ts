@@ -10,13 +10,22 @@ import {
 } from "midway";
 import { IPageTplService } from "../../typings/service/pageTpl";
 
+/**
+ * @controller api 会场模板接口
+ */
 @provide()
 @controller("/page")
-export class PageTplController {
+export default class PageTplController {
   @inject() ctx: Context;
 
   @inject("pageTplService") service: IPageTplService;
 
+  /**
+   * @summary 获取全部会场模板
+   * @description 获取全部的会场模板列表
+   * @router get /page
+   * @request body getPageTplList *body
+   */
   @get("/")
   async getPageTplList() {
     const res = await this.service.getPageTplList();
@@ -24,6 +33,12 @@ export class PageTplController {
     return res;
   }
 
+  /**
+   * @summary 添加会场模板
+   * @description 添加会场模板
+   * @router post /page
+   * @request body addPageTpl *body
+   */
   @post("/")
   async addPageTpl() {
     try {
@@ -36,6 +51,12 @@ export class PageTplController {
     }
   }
 
+  /**
+   * @summary 修改会场模板
+   * @description 修改会场模板的基本信息
+   * @router put /page
+   * @request body updatePageTpl *body
+   */
   @put("/")
   async updatePageTpl() {
     try {
@@ -48,6 +69,12 @@ export class PageTplController {
     }
   }
 
+  /**
+   * @summary 删除会场模板
+   * @description 删除会场模板
+   * @router delete /page
+   * @request body deletePageTpl *body
+   */
   @del("/")
   async deletePageTpl() {
     try {

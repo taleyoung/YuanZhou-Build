@@ -97,8 +97,6 @@ const PageCard: FC<IProps> = () => {
     getList();
   };
 
-  // const showMsg = (tip: string) => Message.success(tip);
-
   return (
     <div className={style.container}>
       <div className={style.topBar}>
@@ -138,7 +136,7 @@ const PageCard: FC<IProps> = () => {
           />
         </div>
         <div className={style.input}>
-          图片：
+          预览：
           <Input
             defaultValue="clear by click"
             size="medium"

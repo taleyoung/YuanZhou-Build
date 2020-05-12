@@ -33,6 +33,17 @@ export default (appInfo: any) => {
       enable: false
     }
   };
+  config.swaggerdoc = {
+    dirScanner: "./app/controller",
+    apiInfo: {
+      title: "YuanZhou-Server",
+      description: "server for YuanZhou-Build",
+      version: "1.0.0"
+    },
+    schemes: ["http"],
+    enable: true,
+    routerMap: false
+  };
 
   return config;
 };
