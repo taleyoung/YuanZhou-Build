@@ -1,5 +1,7 @@
 # ice-stark-layout
 
+客户端的主应用
+
 ## 使用
 
 - 启动调试服务: `npm start`
@@ -14,5 +16,3 @@
 - 页面文件: `src/pages`
 
 ## 效果图
-
-![screenshot](https://img.alicdn.com/tfs/TB14igtaVT7gK0jSZFpXXaTkpXa-2878-1368.png)
